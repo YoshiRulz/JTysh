@@ -1,2 +1,2 @@
-# jtysh
-Java-based alternative to the interactive Unix shell, putting static typing in every pipeline
+## jtysh
+See also: [TySh](https://github.com/Icelandjack/TySh) and [Ammonite](https://github.com/lihaoyi/ammonite), projects implementing a similar idea in Haskell and Scala, respectively.
