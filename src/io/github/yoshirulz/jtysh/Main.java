@@ -4,13 +4,15 @@ import java.io.*;
 import java.util.List;
 
 import static java.lang.ProcessBuilder.Redirect.*;
-import static java.util.concurrent.TimeUnit.SECONDS;
 
 /**
  * @author YoshiRulz
- * @version 2017-11-18/00
+ * @version 2017-11-20/00
  */
 public class Main {
+	private static final String INST_ERR_INTERUPT = "The sub-process was interrupted! (Did you press ^C?)";
+	private static final String INST_ERR_SUFFIX = " Stacktrace:";
+
 	private static final String INST_STRING = "x-rnasi8";
 	private static final String STDOUT_HEADER = "====================";
 
@@ -28,6 +30,7 @@ public class Main {
 				return;
 			}
 			execute(args);
+			Debug.debug();
 		}
 	}
 
@@ -43,26 +46,35 @@ public class Main {
 		try {
 			// tl;dr: $(which java >$jtysh_temp)
 			tempFile = File.createTempFile("jtysh-", null);
-			ProcessBuilder p = new ProcessBuilder(
-					new String[]{"/usr/bin/which", "java"} //TODO port to Windows, check install dir of `which` on macOS
-				).redirectOutput(to(new File(tempFile.getPath()))).redirectError(DISCARD);
-			Process p2 = p.start();
-			p2.waitFor(1, SECONDS);
+			ProcessBuilder pb = new ProcessBuilder("/usr/bin/which", "java") //TODO port to Windows, check install dir of `which` on macOS
+				.redirectOutput(to(tempFile)).redirectError(DISCARD);
+			Process p = pb.start();
+			p.waitFor(1, java.util.concurrent.TimeUnit.SECONDS);
 
 			// tl;dr: $($(cat $jtysh_temp | head -n 1) -classpath /path/to/jtysh/install io.github.yoshirulz.jtysh $jtysh_inst)
 			// ...which, given that it requires nested expansions to write as a shell script, might be a bad idea.
+			String javaPath = "/usr/bin/printf"; //TODO port to Windows, check install dir of `printf` on macOS
+			Reader r = new FileReader(tempFile);
+			try (BufferedReader br = new BufferedReader(r)) {
+				javaPath = br.readLine();
+			} catch (IOException e) {
+				e.printStackTrace();
+			} finally {
+				r.close();
+			}
 			List<String> temp = List.of(
-					new BufferedReader(new FileReader(tempFile)).readLine(), // First line of $(which java) output - Java path
-					"-classpath",
-					Main.class.getProtectionDomain().getCodeSource().getLocation().getFile(), // This project's `.../src` dir
-					Main.class.getName(),
-					INST_STRING
-				);
-			for (int i = 1; i < args.length; i++) temp.add(args[i]);
-			p = new ProcessBuilder(temp).redirectOutput(INHERIT).redirectError(INHERIT);
-			p2 = p.start();
-			p2.waitFor();
+				javaPath, // First line of $(which java) output - Java path
+				"-classpath",
+				Main.class.getProtectionDomain().getCodeSource().getLocation().getFile(), // This project's `.../src` dir
+				Main.class.getName(),
+				INST_STRING
+			);
+			for (String s : args) temp.add(s);
+			pb = new ProcessBuilder(temp).redirectOutput(INHERIT).redirectError(INHERIT);
+			p = pb.start();
+			p.waitFor();
 		} catch (InterruptedException e) {
+			System.out.println(INST_ERR_INTERUPT + INST_ERR_SUFFIX);
 			e.printStackTrace();
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
