@@ -3,8 +3,9 @@ package io.github.yoshirulz.jtysh;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.List;
+import java.util.Arrays;
 
+import static io.github.yoshirulz.jtysh.JTyshInternalError.CannotFindJavaParadox;
 import static io.github.yoshirulz.jtysh.JTyshInternalError.InstanceInterrupted;
 import static java.lang.ProcessBuilder.Redirect.INHERIT;
 
@@ -54,10 +55,10 @@ public class Main {
 	 */
 	private static void execute(String[] args) {
 		try {
-			ArrayList<String> temp = new ArrayList<String>();
+			ArrayList<String> temp = new ArrayList<>();
 			temp.add(new WhichWrapper("java").path);
-			for (String s : INST_ARGS) temp.add(s);
-			for (String s : args) temp.add(s);
+			temp.addAll(Arrays.asList(INST_ARGS));
+			temp.addAll(Arrays.asList(args));
 			ProcessBuilder pb = new ProcessBuilder(temp)
 				.redirectOutput(INHERIT).redirectError(INHERIT);
 			Process p = pb.start();
@@ -68,6 +69,7 @@ public class Main {
 		} catch (IOException e) {
 			e.printStackTrace();
 		} catch (WhichWrapper.ProgramNotFoundException e) {
+			error(CannotFindJavaParadox);
 			e.printStackTrace();
 		} finally {
 			System.out.println();

@@ -6,7 +6,7 @@ import java.util.concurrent.TimeUnit;
 
 import static io.github.yoshirulz.jtysh.JTyshInternalError.CannotFinishTempfileRead;
 import static java.lang.ProcessBuilder.Redirect;
-import static java.lang.ProcessBuilder.Redirect.DISCARD;
+import static java.lang.ProcessBuilder.Redirect.PIPE;
 
 /**
  * @author YoshiRulz
@@ -21,14 +21,14 @@ public class ShellCommandWrapper {
 		tempFile = File.createTempFile("jtysh-", null);
 		Redirect toTempFile = Redirect.to(tempFile);
 		ProcessBuilder pb = new ProcessBuilder(cmdPath)
-			.redirectOutput(toTempFile).redirectError(ignoreError ? DISCARD : toTempFile);
+			.redirectOutput(toTempFile).redirectError(ignoreError ? PIPE : toTempFile);
 		execute(pb, timeout, timeoutUnits);
 	}
 	public ShellCommandWrapper(String[] cmdPath, boolean ignoreError, int timeout, TimeUnit timeoutUnits) throws IOException, InterruptedException {
 		tempFile = File.createTempFile("jtysh-", null);
 		Redirect toTempFile = Redirect.to(tempFile);
 		ProcessBuilder pb = new ProcessBuilder(cmdPath)
-			.redirectOutput(toTempFile).redirectError(ignoreError ? DISCARD : toTempFile);
+			.redirectOutput(toTempFile).redirectError(ignoreError ? PIPE : toTempFile);
 		execute(pb, timeout, timeoutUnits);
 	}
 
@@ -37,7 +37,7 @@ public class ShellCommandWrapper {
 		p.waitFor(timeout, timeoutUnits);
 
 		Reader r = new FileReader(tempFile);
-		ArrayList<String> temp = new ArrayList<String>();
+		ArrayList<String> temp = new ArrayList<>();
 		try (BufferedReader br = new BufferedReader(r)) {
 			while (br.ready()) temp.add(br.readLine());
 		} catch (IOException e) {
