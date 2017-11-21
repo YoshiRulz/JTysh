@@ -13,13 +13,26 @@ import static java.lang.ProcessBuilder.Redirect.DISCARD;
  * @version 2017-11-21/00
  */
 public class ShellCommandWrapper {
-	public final String[] output;
+	protected String[] output;
 
-	public ShellCommandWrapper(String[] cmdPath, boolean ignoreError, int timeout, TimeUnit timeoutUnits) throws IOException, InterruptedException {
-		File tempFile = File.createTempFile("jtysh-", null);
+	private File tempFile;
+
+	public ShellCommandWrapper(ArrayList<String> cmdPath, boolean ignoreError, int timeout, TimeUnit timeoutUnits) throws IOException, InterruptedException {
+		tempFile = File.createTempFile("jtysh-", null);
 		Redirect toTempFile = Redirect.to(tempFile);
 		ProcessBuilder pb = new ProcessBuilder(cmdPath)
 			.redirectOutput(toTempFile).redirectError(ignoreError ? DISCARD : toTempFile);
+		execute(pb, timeout, timeoutUnits);
+	}
+	public ShellCommandWrapper(String[] cmdPath, boolean ignoreError, int timeout, TimeUnit timeoutUnits) throws IOException, InterruptedException {
+		tempFile = File.createTempFile("jtysh-", null);
+		Redirect toTempFile = Redirect.to(tempFile);
+		ProcessBuilder pb = new ProcessBuilder(cmdPath)
+			.redirectOutput(toTempFile).redirectError(ignoreError ? DISCARD : toTempFile);
+		execute(pb, timeout, timeoutUnits);
+	}
+
+	private void execute(ProcessBuilder pb, int timeout, TimeUnit timeoutUnits) throws IOException, InterruptedException {
 		Process p = pb.start();
 		p.waitFor(timeout, timeoutUnits);
 
@@ -35,5 +48,9 @@ public class ShellCommandWrapper {
 			output = new String[temp.size()];
 			for (int i = 0; i < output.length; i++) output[i] = temp.get(i);
 		}
+	}
+
+	public String[] getOutput() {
+		return output;
 	}
 }
