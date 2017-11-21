@@ -1,9 +1,11 @@
 package io.github.yoshirulz.jtysh;
 
-import java.io.*;
+import java.io.File;
+import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
-import static java.lang.ProcessBuilder.Redirect.*;
+import static java.lang.ProcessBuilder.Redirect.INHERIT;
 
 /**
  * @author YoshiRulz
@@ -11,16 +13,23 @@ import static java.lang.ProcessBuilder.Redirect.*;
  */
 public class Main {
 	private static final String INST_ERR_INTERUPT = "The sub-process was interrupted! (Did you press ^C?)";
-	private static final String INST_ERR_SUFFIX = " Stacktrace:";
+	private static final String ERR_SUFFIX = " Stacktrace:";
 
 	private static final String INST_STRING = "x-rnasi8";
 	private static final String STDOUT_HEADER = "====================";
+
+	private static final String[] INST_ARGS = new String[]{
+		"-classpath",
+		Main.class.getProtectionDomain().getCodeSource().getLocation().getFile(), // This project's `.../src` dir
+		Main.class.getName(),
+		INST_STRING
+	};
 
 	private static File tempFile;
 
 	public static void main(String[] args) {
 		if (args.length > 0 && args[0].equals(INST_STRING)) {
-			checkInstantiation(args);
+			new JTyshInstantiation().execute();
 		} else {
 			parse();
 			try {
@@ -42,48 +51,31 @@ public class Main {
 		//TODO compile
 	}
 
+	/**
+	 * tl;dr: runs the command:
+	 * $($(which java) -classpath /path/to/jtysh/install io.github.yoshirulz.jtysh $jtysh_inst)
+	 * ...which is very possibly a bad idea.
+	 */
 	private static void execute(String[] args) {
 		try {
-			// tl;dr: $(which java >$jtysh_temp)
-			tempFile = File.createTempFile("jtysh-", null);
-			ProcessBuilder pb = new ProcessBuilder("/usr/bin/which", "java") //TODO port to Windows, check install dir of `which` on macOS
-				.redirectOutput(to(tempFile)).redirectError(DISCARD);
-			Process p = pb.start();
-			p.waitFor(1, java.util.concurrent.TimeUnit.SECONDS);
-
-			// tl;dr: $($(cat $jtysh_temp | head -n 1) -classpath /path/to/jtysh/install io.github.yoshirulz.jtysh $jtysh_inst)
-			// ...which, given that it requires nested expansions to write as a shell script, might be a bad idea.
-			String javaPath = "/usr/bin/printf"; //TODO port to Windows, check install dir of `printf` on macOS
-			Reader r = new FileReader(tempFile);
-			try (BufferedReader br = new BufferedReader(r)) {
-				javaPath = br.readLine();
-			} catch (IOException e) {
-				e.printStackTrace();
-			} finally {
-				r.close();
-			}
-			List<String> temp = List.of(
-				javaPath, // First line of $(which java) output - Java path
-				"-classpath",
-				Main.class.getProtectionDomain().getCodeSource().getLocation().getFile(), // This project's `.../src` dir
-				Main.class.getName(),
-				INST_STRING
-			);
+			ArrayList<String> temp = new ArrayList<String>();
+			temp.add(new WhichWrapper("java").path);
+			for (String s : INST_ARGS) temp.add(s);
 			for (String s : args) temp.add(s);
-			pb = new ProcessBuilder(temp).redirectOutput(INHERIT).redirectError(INHERIT);
-			p = pb.start();
+			ProcessBuilder pb = new ProcessBuilder(temp).redirectOutput(INHERIT).redirectError(INHERIT);
+			Process p = pb.start();
 			p.waitFor();
 		} catch (InterruptedException e) {
-			System.out.println(INST_ERR_INTERUPT + INST_ERR_SUFFIX);
-			e.printStackTrace();
-		} catch (FileNotFoundException e) {
+			System.out.println(INST_ERR_INTERUPT + ERR_SUFFIX);
 			e.printStackTrace();
 		} catch (IOException e) {
+			e.printStackTrace();
+		} catch (WhichWrapper.ProgramNotFoundException e) {
 			e.printStackTrace();
 		}
 	}
 
-	private static void checkInstantiation(String[] s) {
-		System.out.println("Successfully instantiated.");
+	public static void error(JTyshInternalError e) {
+		System.out.println(e.message + ERR_SUFFIX);
 	}
 }
