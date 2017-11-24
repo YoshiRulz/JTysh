@@ -1,11 +1,11 @@
-package io.github.yoshirulz.jtysh;
+package io.github.yoshirulz.jtysh.shell;
 
 import java.io.IOException;
 import java.util.concurrent.TimeUnit;
 
 /**
  * @author YoshiRulz
- * @version 2017-11-21/00
+ * @version 2017-11-24/00
  */
 public class WhichWrapper extends ShellCommandWrapper {
 	private static final int WHICH_TIMEOUT_MS = 1000;

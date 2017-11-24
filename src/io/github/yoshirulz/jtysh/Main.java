@@ -1,5 +1,7 @@
 package io.github.yoshirulz.jtysh;
 
+import io.github.yoshirulz.jtysh.shell.WhichWrapper;
+
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;

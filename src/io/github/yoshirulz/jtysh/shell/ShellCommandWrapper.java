@@ -1,4 +1,6 @@
-package io.github.yoshirulz.jtysh;
+package io.github.yoshirulz.jtysh.shell;
+
+import io.github.yoshirulz.jtysh.Main;
 
 import java.io.*;
 import java.util.ArrayList;
@@ -11,7 +13,7 @@ import static java.lang.ProcessBuilder.Redirect.PIPE;
 
 /**
  * @author YoshiRulz
- * @version 2017-11-21/00
+ * @version 2017-11-24/00
  */
 @SuppressWarnings("UseOfProcessBuilder")
 public class ShellCommandWrapper {
