@@ -17,15 +17,15 @@ public class WhichWrapper extends ShellCommandWrapper {
 				new String[]{"/usr/bin/which", program}, //TODO port to Windows
 				true, WHICH_TIMEOUT_MS, TimeUnit.MILLISECONDS
 			);
-		if (output.length > 0) {
-			path = output[0];
+		String[] o = getOutput();
+		if (o.length > 0) {
+			path = o[0];
 		} else {
-			path = "/usr/bin/printf"; //TODO port to Windows
 			throw new ProgramNotFoundException(program);
 		}
 	}
 
-	public class ProgramNotFoundException extends Exception { //TODO choose less general super
+	public static class ProgramNotFoundException extends Exception { //TODO choose less general super
 		public ProgramNotFoundException(String program) {
 			super("Cannot find the program " + program + " in $PATH!");
 		}
