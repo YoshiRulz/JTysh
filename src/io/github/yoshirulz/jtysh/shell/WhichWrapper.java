@@ -7,22 +7,25 @@ import java.util.concurrent.TimeUnit;
  * @author YoshiRulz
  * @version 2017-11-24/00
  */
-public class WhichWrapper extends ShellCommandWrapper {
-	private static final int WHICH_TIMEOUT_MS = 1000;
+public class WhichWrapper extends ShellExecWrapper {
+	private static final long WHICH_TIMEOUT_MS = 500L;
+	private static final String WHICH_PATH;
+
+	static {
+		//TODO port to Windows
+		WHICH_PATH = "/usr/bin/which";
+	}
 
 	public final String path;
 
 	public WhichWrapper(String program) throws IOException, InterruptedException, ProgramNotFoundException {
 		super(
-				new String[]{"/usr/bin/which", program}, //TODO port to Windows
+				new String[]{WHICH_PATH, program},
 				true, WHICH_TIMEOUT_MS, TimeUnit.MILLISECONDS
 			);
 		String[] o = getOutput();
-		if (o.length > 0) {
-			path = o[0];
-		} else {
-			throw new ProgramNotFoundException(program);
-		}
+		if (o.length == 0) throw new ProgramNotFoundException(program);
+		path = o[0];
 	}
 
 	public static class ProgramNotFoundException extends Exception { //TODO choose less general super
