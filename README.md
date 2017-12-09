@@ -10,7 +10,7 @@ For reference, all four of these examples simply take the URI that was the previ
 ```
 new NoArgPipelineHead(new GitCloneCMD(
 		GitRepoURI.fromURI(new URI(
-			History.get().tail().awk(2).s()
+			History.get().tail().awk(2).asString()
 		))
 	)).run();
 ```
