@@ -1,11 +1,13 @@
 package io.github.yoshirulz.jtysh.uris;
 
+import java.text.MessageFormat;
+
 /**
  * @author YoshiRulz
  * @version 2017-12-03/00
  */
 public enum URIThrowables { ;
-	private static class URIException extends Exception {
+	private static class URIException extends RuntimeException {
 		public URIException(String s) {
 			super(s);
 		}
@@ -17,9 +19,15 @@ public enum URIThrowables { ;
 		}
 	}
 
+	public static final class GitInvalidProtocolException extends URIException {
+		public GitInvalidProtocolException() {
+			super("Git can only use the Git, HTTP(S) and SSH protocols.");
+		}
+	}
+
 	public static final class InvalidURICastException extends URIException {
 		public InvalidURICastException(URI uri, Class<? extends URI> uriClass) {
-			super("Could not cast " + uri + " to " + uriClass);
+			super(MessageFormat.format("Could not cast {0} to {1}.", uri, uriClass));
 		}
 	}
 }
