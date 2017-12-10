@@ -16,6 +16,3 @@ import static io.github.yoshirulz.jtysh.JTyshNatLang.$;
 @SuppressWarnings("deprecation")
 class JTyshInstantiation {
 	void execute() {
-		
-	}
-}
