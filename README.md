@@ -1,6 +1,6 @@
-## JTysh
+# JTysh
 
-### Quick start
+## Quick start
 ```
 $> git clone https://github.com/YoshiRulz/JTysh.git && cd JTysh
 $> ./jty.sh "long time = System.nanoTime();" "System.out.println(time);"
@@ -11,7 +11,7 @@ Mind your escapes! Under bash (and others?) $vars and $(subshells) aren't evalua
 
 You can run JTysh with the flag `-f <file>` to read Java code from a file, or use the flag `-i` to read from the standard input (press enter again after the last line to exec). You can also use the `-s` flag to make JTysh behave like a shell, taking a set of Java commands, executing them as their own program, then accepting more input.
 
-### .java instead of .sh? No way!
+## .java instead of .sh? No way!
 Java, despite its reputation, is capable of allowing programmers to express their program's goals succinctly.
 
 The following example shows that, as well as being (arguably) easier to parse by eye, the (for lack of a better term) "natlang'd" Java can better capture the relationship between programs and their arguments (by adding syntax, esp. nesting in parameters).
@@ -46,10 +46,10 @@ All that, simply because the very language that forms the foundation of our belo
 
 JTysh is not the best idea. It may not even be a good idea. All it promises to be is a *better* idea, and I'd love to see what other better ideas the open-source community can come up with. Which leads me to...
 
-### Better ideas
+## Better ideas
 The two I've heard of are @lihaoyi's Ammonite-Shell (part of [Ammonite](https://github.com/lihaoyi/ammonite)), which is the Scala-based older brother of this project, and [@Icelandjack's TySh](https://github.com/Icelandjack/TySh), a similar idea relying on the Haskell environment rather than the JVM.
 
-### Bash sux lol
+## Bash sux lol
 Just some examples of bad design or bad UX in bash and similar shells.
 
 The fastest way to loop through a file, printing each line with an indent (or in quotes, or something) is not to use something like `for line in $file; do ...; done` (because that doesn't work), or the "correct" `while read line; do ...; done<$file` - no, those are too obvious. It's actually by [using an external program](http://www.bashguru.com/2010/05/how-to-read-file-line-by-line-in-shell.html) (in this case, the venerable awk).
