@@ -1,8 +1,6 @@
 package io.github.yoshirulz.jtysh.uris;
 
-import io.github.yoshirulz.jtysh.uris.URIThrowables.GitHubDeprecatedProtocolException;
-import io.github.yoshirulz.jtysh.uris.URIThrowables.GitInvalidProtocolException;
-import io.github.yoshirulz.jtysh.uris.URIThrowables.InvalidURICastException;
+import io.github.yoshirulz.jtysh.uris.URIThrowables.*;
 
 import static io.github.yoshirulz.jtysh.uris.URIHandler.URIProtocol.*;
 
@@ -23,11 +21,11 @@ public class GitRepoURI extends URI {
 
 	@SuppressWarnings("MethodWithMoreThanThreeNegations")
 	public static GitRepoURI fromURI(URI uri) {
-		if (!(uri.handler instanceof URIProtocol) ||
-				!isValidGitProtocol(uri.handler) ||
-				(uri.handler != Git && !uri.location[uri.location.length - 1].endsWith(GIT_EXT))) // Using HTTP(S) or SSH and path doesn't match *.git
+		if (!(uri.getHandler() instanceof URIProtocol) ||
+				!isValidGitProtocol(uri.getHandler()) ||
+				(uri.getHandler() != Git && !uri.getLocation()[uri.getLocation().length - 1].endsWith(GIT_EXT))) // Using HTTP(S) or SSH and path doesn't match *.git
 			throw new InvalidURICastException(uri, GitRepoURI.class);
-		return new GitRepoURI(uri.handler, uri.getFullDomain(), uri.location);
+		return new GitRepoURI(uri.getHandler(), uri.getFullDomain(), uri.getLocation());
 	}
 
 	@SuppressWarnings("StaticMethodNamingConvention")
@@ -54,8 +52,8 @@ public class GitRepoURI extends URI {
 		}
 
 		public WebURI asWebURI() {
-			if (handler != HTTP && handler != HTTPS) throw new InvalidURICastException(this, URI.class);
-			return new WebURI(getFullDomain(), location, null, null, handler == HTTPS);
+			if (getHandler() != HTTP && getHandler() != HTTPS) throw new InvalidURICastException(this, URI.class);
+			return new WebURI(getFullDomain(), getLocation(), null, null, getHandler() == HTTPS);
 		}
 	}
 

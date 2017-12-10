@@ -30,4 +30,10 @@ public enum URIThrowables { ;
 			super(MessageFormat.format("Could not cast {0} to {1}.", uri, uriClass));
 		}
 	}
+
+	public static final class WebInvalidProtocolException extends URIException {
+		public WebInvalidProtocolException() {
+			super("WebURIs can only use HTTP(S).");
+		}
+	}
 }
