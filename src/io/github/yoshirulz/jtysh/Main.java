@@ -1,6 +1,7 @@
 package io.github.yoshirulz.jtysh;
 
 import io.github.yoshirulz.jtysh.shell.WhichWrapper;
+import io.github.yoshirulz.jtysh.shell.WhichWrapper.ProgramNotFoundException;
 
 import java.io.File;
 import java.io.IOException;
@@ -13,7 +14,7 @@ import static java.lang.ProcessBuilder.Redirect.INHERIT;
 
 /**
  * @author YoshiRulz
- * @version 2017-11-20/00
+ * @version 2017-12-10/00
  */
 public class Main {
 	private static final String STDOUT_HEADER = "====================";
@@ -70,7 +71,7 @@ public class Main {
 			e.printStackTrace();
 		} catch (IOException e) {
 			e.printStackTrace();
-		} catch (WhichWrapper.ProgramNotFoundException e) {
+		} catch (ProgramNotFoundException e) {
 			error(CannotFindJavaParadox);
 			e.printStackTrace();
 		} finally {

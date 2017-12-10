@@ -1,6 +1,5 @@
 package io.github.yoshirulz.jtysh.uris;
 
-import io.github.yoshirulz.jtysh.uris.URIHandler.URIProtocol;
 import io.github.yoshirulz.jtysh.uris.URIThrowables.GitHubDeprecatedProtocolException;
 import io.github.yoshirulz.jtysh.uris.URIThrowables.InvalidURICastException;
 
@@ -8,7 +7,7 @@ import static io.github.yoshirulz.jtysh.uris.URIHandler.URIProtocol.*;
 
 /**
  * @author YoshiRulz
- * @version 2017-11-19/00
+ * @version 2017-12-10/00
  */
 public class GitRepoURI extends URI {
 	public GitRepoURI(URIHandler connType, URIDomain domain, String[] location) {

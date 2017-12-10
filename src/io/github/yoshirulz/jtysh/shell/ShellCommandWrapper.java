@@ -1,6 +1,7 @@
 package io.github.yoshirulz.jtysh.shell;
 
 import io.github.yoshirulz.jtysh.Main;
+import io.github.yoshirulz.jtysh.shell.WhichWrapper.ProgramNotFoundException;
 
 import java.io.*;
 import java.util.ArrayList;
@@ -13,7 +14,7 @@ import static java.lang.ProcessBuilder.Redirect.PIPE;
 
 /**
  * @author YoshiRulz
- * @version 2017-11-24/00
+ * @version 2017-12-10/00
  */
 @SuppressWarnings("UseOfProcessBuilder")
 public class ShellCommandWrapper {
@@ -38,7 +39,7 @@ public class ShellCommandWrapper {
 		execute(pb, timeout, timeoutUnits);
 	}
 
-	public static ShellCommandWrapper withLookup(String program, String[] args, boolean ignoreError, long timeout, TimeUnit timeoutUnits) throws WhichWrapper.ProgramNotFoundException, IOException, InterruptedException {
+	public static ShellCommandWrapper withLookup(String program, String[] args, boolean ignoreError, long timeout, TimeUnit timeoutUnits) throws ProgramNotFoundException, IOException, InterruptedException {
 		String[] temp = new String[args.length + 1];
 		temp[0] = new WhichWrapper(program).path;
 		System.arraycopy(args, 0, temp, 1, args.length);

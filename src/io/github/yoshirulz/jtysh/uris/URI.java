@@ -9,7 +9,7 @@ import static io.github.yoshirulz.jtysh.uris.URIHandler.URIProtocol.parseString;
 
 /**
  * @author YoshiRulz
- * @version 2017-11-19/00
+ * @version 2017-12-10/00
  */
 @SuppressWarnings("HardCodedStringLiteral")
 public class URI {
@@ -20,7 +20,7 @@ public class URI {
 
 	public URI(URIHandler handler, URIDomain domain, String[] location) {
 		this.handler = handler;
-		this.fullDomain = domain;
+		fullDomain = domain;
 		this.location = location;
 	}
 

@@ -10,7 +10,7 @@ import static io.github.yoshirulz.jtysh.uris.URIHandler.URIProtocol.HTTPS;
 
 /**
  * @author YoshiRulz
- * @version 2017-11-19/00
+ * @version 2017-12-10/00
  */
 public class WebURI extends URI {
 	public final String[] trueLocation;
@@ -19,7 +19,7 @@ public class WebURI extends URI {
 
 	public WebURI(URIDomain domain, String[] location, URLQueryString query, String target, boolean isHTTPS) {
 		super(isHTTPS ? HTTPS : HTTP, domain, concatLocation(location, query, target));
-		this.trueLocation = location;
+		trueLocation = location;
 		this.query = query;
 		this.target = target;
 	}
