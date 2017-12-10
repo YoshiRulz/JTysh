@@ -2,13 +2,14 @@
 
 ### Quick start
 ```
-git clone https://github.com/YoshiRulz/JTysh.git && cd JTysh
-./jty.sh "long time = System.nanoTime();" "System.out.println(time);"
-./jty.sh '$.echo($.$("uname -a").t()).r();'
+$> git clone https://github.com/YoshiRulz/JTysh.git && cd JTysh
+$> ./jty.sh "long time = System.nanoTime();" "System.out.println(time);"
+$> ./jty.sh '$.echo($.$("uname -a").t()).r();'
+$> ./jty.sh -s
 ```
 Mind your escapes! Under bash (and others?) $vars and $(subshells) aren't evaluated inside single quotes.
 
-You can also run JTysh with the flag `-f <file>` to read Java code from a file, or use the flag `-i` to read from the standard input (press enter again after the last line to exec). You can also use the `-s` flag to make JTysh behave like a shell, taking a set of Java commands, executing them as their own program, then accepting more input.
+You can run JTysh with the flag `-f <file>` to read Java code from a file, or use the flag `-i` to read from the standard input (press enter again after the last line to exec). You can also use the `-s` flag to make JTysh behave like a shell, taking a set of Java commands, executing them as their own program, then accepting more input.
 
 ### .java instead of .sh? No way!
 Java, despite its reputation, is capable of allowing programmers to express their program's goals succinctly.
