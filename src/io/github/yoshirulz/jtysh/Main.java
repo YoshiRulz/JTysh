@@ -28,19 +28,19 @@ public class Main {
 	private static File tempFile;
 
 	public static void main(String[] args) {
-		if (args.length > 0 && args[0].equals(INST_ARGS[3])) {
+//		if (args.length > 0 && args[0].equals(INST_ARGS[3])) {
 			new JTyshInstantiation().execute();
-		} else {
-			parse();
-			try {
-				compile();
-			} catch (Throwable t) {
-				t.printStackTrace();
-				return;
-			}
-			Debug.debug();
-			execute(args);
-		}
+//		} else {
+//			parse();
+//			try {
+//				compile();
+//			} catch (Throwable t) {
+//				t.printStackTrace();
+//				return;
+//			}
+//			Debug.debug();
+//			execute(args);
+//		}
 	}
 
 	private static void parse() {
