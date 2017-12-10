@@ -1,8 +1,11 @@
 package io.github.yoshirulz.jtysh.uris;
 
+import io.github.yoshirulz.jtysh.uris.URIHandler.URICustomHandler;
+
 import java.util.StringJoiner;
 
-import static io.github.yoshirulz.jtysh.uris.URIProtocol.*;
+import static io.github.yoshirulz.jtysh.uris.URIHandler.URIProtocol.UNKNOWN;
+import static io.github.yoshirulz.jtysh.uris.URIHandler.URIProtocol.parseString;
 
 /**
  * @author YoshiRulz
@@ -25,7 +28,7 @@ public class URI {
 		String[] splitURI = uri.split("/");
 		if ("".equals(splitURI[1]) && splitURI[0].endsWith(":")) {
 			String temp = splitURI[0].substring(0, splitURI[0].length() - 1);
-			URIHandler temp1 = URIProtocol.parseString(temp);
+			URIHandler temp1 = parseString(temp);
 			fullDomain = URIDomain.parseString(splitURI[2]);
 			if (temp1 == UNKNOWN) handler = new URICustomHandler(temp, getFullDomain().port, true);
 			else handler = temp1;

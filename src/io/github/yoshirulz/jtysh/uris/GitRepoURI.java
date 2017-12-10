@@ -1,9 +1,10 @@
 package io.github.yoshirulz.jtysh.uris;
 
+import io.github.yoshirulz.jtysh.uris.URIHandler.URIProtocol;
 import io.github.yoshirulz.jtysh.uris.URIThrowables.GitHubDeprecatedProtocolException;
 import io.github.yoshirulz.jtysh.uris.URIThrowables.InvalidURICastException;
 
-import static io.github.yoshirulz.jtysh.uris.URIProtocol.*;
+import static io.github.yoshirulz.jtysh.uris.URIHandler.URIProtocol.*;
 
 /**
  * @author YoshiRulz
