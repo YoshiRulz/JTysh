@@ -1,5 +1,13 @@
 ## JTysh
 
+### Quick start
+```
+git clone https://github.com/YoshiRulz/JTysh.git && cd JTysh
+./jty.sh "long time = System.nanoTime();" "System.out.println(time);"
+./jty.sh '$.echo($.$("uname -a").t()).r();'
+```
+Mind your escapes! Under bash (and others?) $vars and $(subshells) aren't evaluated inside single quotes.
+
 ### .java instead of .sh? No way!
 Java, despite its reputation, is capable of allowing programmers to express their program's goals succinctly.
 
@@ -16,15 +24,15 @@ new NoArgPipelineHead(new GitCloneCMD(
 ```
 After rewriting that as "natlang'd" Java using overloaded methods:
 ```
-$.git.clone_($.history().tail().awk(2).s()).r();          <--- 48 chars
+$.git.clone_($.history().tail().awk(2).s()).r();          <== 48 chars
 ```
 ...by comparing that to the equivalent POSIX bash:
 ```
-git clone "$(history | tail -n 1 | awk "{print \\$3}")"   <--- 55 chars
+git clone "$(history | tail -n 1 | awk "{print \\$3}")"   <== 55 chars
 ```
 ...or, incorrectly but commonly in bash:
 ```
-git clone `history|tail -n1|awk {print\\$3}`              <--- 44 chars
+git clone `history|tail -n1|awk {print\\$3}`              <== 44 chars
 ```
 ...it becomes clear that very little brevity needs to be sacrificed for great gains in clarity.
 The potential benefits only grow when you consider how often shell scripts need to invoke either:
