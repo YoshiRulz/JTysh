@@ -1,13 +1,19 @@
 #!/bin/sh
-# v2017-12-10/01
+# v2017-12-10/02
 
 src=src
 pkg=$src/io/github/yoshirulz/jtysh
 inst=$pkg/JTyshInstantiation.java
 out=out/production/JTysh
 mkdir -p $out
-cat $pkg/header.java.txt >$inst
 
+# Make -s(hell) supercede everything
+if [ "$1" = "-s" ]; then
+	while true; do ./jty.sh -i; done
+	exit 0
+fi
+
+cat $pkg/header.java.txt >$inst
 case "$1" in
 	"-f")
 		awk '{print"\t\t"$0}' "$2" >>$inst;;
@@ -20,7 +26,6 @@ case "$1" in
 			if [ -n "$l" ]; then printf "\t\t%s\n" "$l" >>$inst; fi
 		done;;
 esac
-
 cat $pkg/footer.java.txt >>$inst
 javac -sourcepath $src -d $out $pkg/Main.java
 java -classpath $out io.github.yoshirulz.jtysh.Main
