@@ -14,7 +14,7 @@ import io.github.yoshirulz.jtysh.uris.*;
 import static io.github.yoshirulz.jtysh.JTyshNatLang.$;
 
 @SuppressWarnings({"deprecation", "ClassNamePrefixedWithPackageName"})
-class JTyshInstantiation {
-	void execute() {
+enum JTyshInstantiation { ;
+	static void execute() {
 	}
 }
