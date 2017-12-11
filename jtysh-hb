@@ -1,0 +1,5 @@
+#!/bin/sh
+# v2017-12-11/00
+# Use the hashbang `#!/bin/jtysh-hb` as the first line of a file and run it like `$> ./file.sh` to have JTysh interpret it.
+# This only works if both `jtysh` and `jtysh-hb` can be found in `$PATH`.
+cat $1 | tail +2 | jtysh -i
