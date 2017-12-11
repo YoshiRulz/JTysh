@@ -8,7 +8,7 @@ import static io.github.yoshirulz.jtysh.uris.URIHandler.URIProtocol.parseString;
 
 /**
  * @author YoshiRulz
- * @version 2017-12-10/00
+ * @version 2017-12-11/00
  */
 @SuppressWarnings({"ClassNamingConvention", "HardCodedStringLiteral", "WeakerAccess", "unused"})
 public class URI {

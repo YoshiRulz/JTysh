@@ -5,7 +5,7 @@ import static java.lang.Integer.parseInt;
 /**
  * Now imagine how many constructors there'd be if this was all just part of `URI`.
  * @author YoshiRulz
- * @version 2017-11-19/00
+ * @version 2017-12-11/00
  */
 @SuppressWarnings({"ClassWithTooManyConstructors", "WeakerAccess"})
 public class URIDomain {

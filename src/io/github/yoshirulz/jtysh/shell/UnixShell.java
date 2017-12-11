@@ -2,7 +2,7 @@ package io.github.yoshirulz.jtysh.shell;
 
 /**
  * @author YoshiRulz
- * @version 2017-11-20/00
+ * @version 2017-12-11/00
  */
 public enum UnixShell {
 	bash, csh, fish, ksh, zsh,

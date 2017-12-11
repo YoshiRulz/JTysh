@@ -6,7 +6,7 @@ import io.github.yoshirulz.jtysh.shell.History;
 
 /**
  * @author YoshiRulz
- * @version 2017-12-04/00
+ * @version 2017-12-11/00
  */
 public final class JTyshHistoryReadCMD implements NoArgPipeCMD {
 	public static final JTyshHistoryReadCMD JTYSH_HISTORY = new JTyshHistoryReadCMD();

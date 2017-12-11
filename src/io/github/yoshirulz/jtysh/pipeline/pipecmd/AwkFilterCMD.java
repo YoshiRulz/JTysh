@@ -11,7 +11,7 @@ import static java.text.MessageFormat.format;
 /**
  * Not a wrapper for (g)awk, nor an implementation of any awk features outside of field iteration.
  * @author YoshiRulz
- * @version 2017-12-04/00
+ * @version 2017-12-11/00
  */
 public final class AwkFilterCMD implements ReqArgPipeCMD {
 	private static final String[] CMD_STRING = new String[]{"awk", "\"'{'print \\${0}'}'\""};

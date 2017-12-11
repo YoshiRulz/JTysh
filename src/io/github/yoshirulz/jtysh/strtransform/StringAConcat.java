@@ -4,7 +4,7 @@ import java.util.StringJoiner;
 
 /**
  * @author YoshiRulz
- * @version 2017-12-03/00
+ * @version 2017-12-11/00
  */
 public enum StringAConcat { ;
 	public static String with(String separator, String[] a) {

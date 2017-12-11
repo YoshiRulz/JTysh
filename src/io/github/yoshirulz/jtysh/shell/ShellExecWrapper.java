@@ -14,7 +14,7 @@ import static java.lang.ProcessBuilder.Redirect.PIPE;
 
 /**
  * @author YoshiRulz
- * @version 2017-11-24/00
+ * @version 2017-12-11/00
  */
 @SuppressWarnings({"ClassNamePrefixedWithPackageName", "UseOfProcessBuilder"})
 public class ShellExecWrapper {

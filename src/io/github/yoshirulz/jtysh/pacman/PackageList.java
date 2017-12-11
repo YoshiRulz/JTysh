@@ -5,7 +5,7 @@ import java.util.StringJoiner;
 
 /**
  * @author YoshiRulz
- * @version 2017-11-19/00
+ * @version 2017-12-11/00
  */
 public class PackageList {
 	private ArrayList<Package> value;

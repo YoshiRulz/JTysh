@@ -15,7 +15,7 @@ import static java.text.MessageFormat.format;
 /**
  * Danger zone - mixing OOP Pipelines w/ the event-driven `Main.main()`-logging ShellExecWrapper. The exceptions thrown by the latter are all rethrown as new RuntimeExceptions.
  * @author YoshiRulz
- * @version 2017-12-04/00
+ * @version 2017-12-11/00
  */
 public final class ShellExecMetaWrapperCMD implements NoArgPipeCMD {
 	private static final String CMD_STRING = "echo $({0}{1})";

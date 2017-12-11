@@ -8,7 +8,7 @@ import static java.text.MessageFormat.format;
 
 /**
  * @author YoshiRulz
- * @version 2017-12-04/00
+ * @version 2017-12-11/00
  */
 public final class TailFilterCMD implements ReqArgPipeCMD {
 	private static final String CMD_STRING = "tail -n{0}";

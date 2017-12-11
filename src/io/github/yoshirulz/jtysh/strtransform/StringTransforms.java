@@ -2,7 +2,7 @@ package io.github.yoshirulz.jtysh.strtransform;
 
 /**
  * @author YoshiRulz
- * @version 2017-11-23/00
+ * @version 2017-12-11/00
  */
 public enum StringTransforms { ;
 	public enum LatinCharset { ;

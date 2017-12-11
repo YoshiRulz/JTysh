@@ -6,7 +6,7 @@ import static io.github.yoshirulz.jtysh.uris.URIHandler.URIProtocol.*;
 
 /**
  * @author YoshiRulz
- * @version 2017-12-10/00
+ * @version 2017-12-11/00
  */
 public class GitRepoURI extends URI {
 	private static final String GIT_EXT = ".git";

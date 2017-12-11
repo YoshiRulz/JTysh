@@ -9,7 +9,7 @@ import java.util.Map;
 
 /**
  * @author YoshiRulz
- * @version 2017-12-10/00
+ * @version 2017-12-11/00
  */
 public class FakeGitRepo implements Pipeable {
 	private static final String DEFAULT_REMOTE = "origin";

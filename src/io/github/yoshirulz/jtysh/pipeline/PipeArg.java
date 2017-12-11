@@ -9,7 +9,7 @@ import static io.github.yoshirulz.jtysh.strtransform.StringSplit.onNewlines;
 
 /**
  * @author YoshiRulz
- * @version 2017-12-06/00
+ * @version 2017-12-11/00
  */
 @SuppressWarnings("ClassWithTooManyDependents")
 public class PipeArg<T extends Pipeable> {

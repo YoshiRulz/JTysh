@@ -10,7 +10,7 @@ import static io.github.yoshirulz.jtysh.strtransform.StringTransforms.LatinChars
 
 /**
  * @author YoshiRulz
- * @version 2017-11-23/00
+ * @version 2017-12-11/00
  */
 @SuppressWarnings("WeakerAccess")
 public class MorseCodeConverter implements StringTransform1To1 {

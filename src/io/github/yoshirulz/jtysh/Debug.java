@@ -2,7 +2,7 @@ package io.github.yoshirulz.jtysh;
 
 /**
  * @author YoshiRulz
- * @version 2017-11-20/00
+ * @version 2017-12-11/00
  */
 public class Debug {
 	public static void debug() {

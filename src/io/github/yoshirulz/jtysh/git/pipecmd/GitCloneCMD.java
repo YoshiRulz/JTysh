@@ -13,7 +13,7 @@ import static io.github.yoshirulz.jtysh.git.pipecmd.GitCloneCMD.CloneOptions.DEF
 
 /**
  * @author YoshiRulz
- * @version 2017-12-06/00
+ * @version 2017-12-11/00
  */
 public class GitCloneCMD implements NoArgPipeCMD {
 	private static final String CMD_STRING = "git clone{1} {0}";

@@ -5,7 +5,7 @@ import java.util.concurrent.TimeUnit;
 
 /**
  * @author YoshiRulz
- * @version 2017-11-24/00
+ * @version 2017-12-11/00
  */
 public class WhichWrapper extends ShellExecWrapper {
 	private static final long WHICH_TIMEOUT_MS = 500L;

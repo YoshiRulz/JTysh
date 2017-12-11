@@ -7,7 +7,7 @@ import static io.github.yoshirulz.jtysh.pipeline.PipeArg.NO_OUTPUT;
 
 /**
  * @author YoshiRulz
- * @version 2017-12-07/00
+ * @version 2017-12-11/00
  */
 public enum TermEchoCMD implements ReqArgPipeCMD {
 	ECHO;

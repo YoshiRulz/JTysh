@@ -14,7 +14,7 @@ import static java.lang.ProcessBuilder.Redirect.PIPE;
 
 /**
  * @author YoshiRulz
- * @version 2017-12-10/00
+ * @version 2017-12-11/00
  */
 @SuppressWarnings("UseOfProcessBuilder")
 public class ShellCommandWrapper {

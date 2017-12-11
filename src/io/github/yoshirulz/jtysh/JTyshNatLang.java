@@ -17,7 +17,7 @@ import static io.github.yoshirulz.jtysh.pipeline.pipecmd.TermEchoCMD.ECHO;
  * Just `import static io.github.yoshirulz.jtysh.JTyshNatLang.$` and you're awaaaaaay...
  * N.B. methods and subclasses (subenums?) are sorted alphabetically in `.java` form.
  * @author YoshiRulz
- * @version 2017-11-28/00
+ * @version 2017-12-11/00
  */
 @SuppressWarnings({"unused", "ClassNamePrefixedWithPackageName"})
 public enum JTyshNatLang { ;

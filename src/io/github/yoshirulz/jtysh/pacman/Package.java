@@ -2,7 +2,7 @@ package io.github.yoshirulz.jtysh.pacman;
 
 /**
  * @author YoshiRulz
- * @version 2017-11-19/00
+ * @version 2017-12-11/00
  */
 public interface Package {
 	String getName();

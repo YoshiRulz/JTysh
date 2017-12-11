@@ -2,7 +2,7 @@ package io.github.yoshirulz.jtysh.uris;
 
 /**
  * @author YoshiRulz
- * @version 2017-12-10/00
+ * @version 2017-12-11/00
  */
 public interface URIHandler {
 	int getDefaultPort();

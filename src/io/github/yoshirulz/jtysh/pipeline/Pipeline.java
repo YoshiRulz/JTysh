@@ -21,7 +21,7 @@ import static java.text.MessageFormat.format;
  * - a single lonely segment that's both the head and final tail of its own pipeline (NoArgPipelineVoid).<br>
  * The idea is one can both nest pipelines and construct them iteratively with method chaining, limited only by commands being marked as data sinks. This is to mimic the behaviour of pipelines in the Unix shell.
  * @author YoshiRulz
- * @version 2017-12-03/00
+ * @version 2017-12-11/00
  */
 @SuppressWarnings("ClassNamePrefixedWithPackageName")
 public interface Pipeline {

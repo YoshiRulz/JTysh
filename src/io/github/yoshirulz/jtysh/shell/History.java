@@ -12,7 +12,7 @@ import static io.github.yoshirulz.jtysh.shell.UnixShell.JTysh;
 
 /**
  * @author YoshiRulz
- * @version 2017-11-20/00
+ * @version 2017-12-11/00
  */
 public class History {
 	private static final String[] NO_OUTPUT = new String[0];

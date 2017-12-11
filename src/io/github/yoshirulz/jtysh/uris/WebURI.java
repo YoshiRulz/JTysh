@@ -12,7 +12,7 @@ import static java.text.MessageFormat.format;
 
 /**
  * @author YoshiRulz
- * @version 2017-12-10/00
+ * @version 2017-12-11/00
  */
 @SuppressWarnings({"ClassHasNoToStringMethod", "ClassNamingConvention"})
 public class WebURI extends URI {

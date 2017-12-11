@@ -5,7 +5,7 @@ import io.github.yoshirulz.jtysh.strtransform.StringTransforms.TransformationTyp
 
 /**
  * @author YoshiRulz
- * @version 2017-11-23/00
+ * @version 2017-12-11/00
  */
 public class SimpleCiphers {
 	public static class CaesarCipher implements StringTransform1To1 {

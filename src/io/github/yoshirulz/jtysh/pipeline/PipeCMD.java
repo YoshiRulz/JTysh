@@ -2,7 +2,7 @@ package io.github.yoshirulz.jtysh.pipeline;
 
 /**
  * @author YoshiRulz
- * @version 2017-12-04/00
+ * @version 2017-12-11/00
  */
 @SuppressWarnings("InterfaceMayBeAnnotatedFunctional")
 public interface PipeCMD {

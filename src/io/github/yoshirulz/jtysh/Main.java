@@ -14,7 +14,7 @@ import static java.lang.ProcessBuilder.Redirect.INHERIT;
 
 /**
  * @author YoshiRulz
- * @version 2017-12-10/00
+ * @version 2017-12-11/00
  */
 public class Main {
 	private static final String STDOUT_HEADER = "====================";
