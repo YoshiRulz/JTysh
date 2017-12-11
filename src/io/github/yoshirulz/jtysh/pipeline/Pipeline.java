@@ -1,5 +1,6 @@
 package io.github.yoshirulz.jtysh.pipeline;
 
+import io.github.yoshirulz.jtysh.Main;
 import io.github.yoshirulz.jtysh.pipeline.PipeArg.Pipeable.RawStringAArg;
 import io.github.yoshirulz.jtysh.pipeline.PipeArg.Pipeable.RawStringArg;
 import io.github.yoshirulz.jtysh.pipeline.PipeCMD.NoArgPipeCMD;
@@ -7,6 +8,11 @@ import io.github.yoshirulz.jtysh.pipeline.PipeCMD.ReqArgPipeCMD;
 import io.github.yoshirulz.jtysh.pipeline.pipecmd.*;
 import io.github.yoshirulz.jtysh.shell.History;
 
+import java.io.*;
+import java.util.ArrayList;
+import java.util.List;
+
+import static io.github.yoshirulz.jtysh.JTyshInternalError.CannotFinishTempfileRead;
 import static io.github.yoshirulz.jtysh.pipeline.pipecmd.TermEchoCMD.ECHO;
 import static java.text.MessageFormat.format;
 
@@ -77,7 +83,21 @@ public interface Pipeline {
 	static ChainablePipeline from(PipeArg<?> p) {
 		return new NoArgPipelineHead(new DumpArgCMD(p));
 	}
-	static ChainablePipeline from(String... s) {
+	static ChainablePipeline from(String[] a) {
+		return from(PipeArg.rawString(a));
+	}
+	static ChainablePipeline from(File f) {
+		List<String> temp = new ArrayList<>(16);
+		//noinspection ImplicitDefaultCharsetUsage
+		try (BufferedReader br = new BufferedReader(new FileReader(f))) {
+			//noinspection MethodCallInLoopCondition
+			while (br.ready()) temp.add(br.readLine());
+		} catch (IOException e) {
+			throw new RuntimeException(e); //TODO
+		}
+		return from(temp.toArray(new String[temp.size()]));
+	}
+	static ChainablePipeline from(String s) {
 		return from(PipeArg.rawString(s));
 	}
 
