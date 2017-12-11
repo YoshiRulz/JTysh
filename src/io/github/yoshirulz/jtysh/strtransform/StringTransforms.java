@@ -34,13 +34,26 @@ public enum StringTransforms { ;
 
 	public interface StringTransform1To1 extends StringTransformation {
 		String performOn(String s);
+		default String[] performOnEach(String[] a) {
+			int l = a.length;
+			String[] toReturn = new String[l];
+			for (int i = 0; i < l; i++) toReturn[i] = performOn(a[i]);
+			return toReturn;
+		}
 	}
 
 	public interface StringTransform2To1 extends StringTransformation {
 		String performOn(String s, String s1);
+		default String[] performOnEach(String[] a, String[] a1) {
+			int l = a.length;
+			if (l != a1.length) throw new RuntimeException("OOPS");
+			String[] toReturn = new String[l];
+			for (int i = 0; i < l; i++) toReturn[i] = performOn(a[i], a1[i]);
+			return toReturn;
+		}
 	}
 
 	public interface StringTransform2To2 extends StringTransformation {
-		String[] performOn(String s, String s1);
+		String[][] performOn(String s, String s1);
 	}
 }
