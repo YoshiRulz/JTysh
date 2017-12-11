@@ -1,7 +1,6 @@
 package io.github.yoshirulz.jtysh.pipeline.pipecmd;
 
 import io.github.yoshirulz.jtysh.pipeline.PipeArg;
-import io.github.yoshirulz.jtysh.pipeline.PipeArg.Pipeable.RawStringArg;
 import io.github.yoshirulz.jtysh.pipeline.PipeCMD.ReqArgPipeCMD;
 import io.github.yoshirulz.jtysh.strtransform.StringSplit;
 

@@ -2,7 +2,6 @@ package io.github.yoshirulz.jtysh.pipeline.pipecmd;
 
 import io.github.yoshirulz.jtysh.pipeline.PipeArg;
 import io.github.yoshirulz.jtysh.pipeline.PipeCMD.ReqArgPipeCMD;
-import io.github.yoshirulz.jtysh.pipeline.Pipeline;
 
 import static io.github.yoshirulz.jtysh.pipeline.PipeArg.rawString;
 import static java.text.MessageFormat.format;

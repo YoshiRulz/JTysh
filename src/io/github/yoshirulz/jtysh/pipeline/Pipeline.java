@@ -1,18 +1,15 @@
 package io.github.yoshirulz.jtysh.pipeline;
 
-import io.github.yoshirulz.jtysh.Main;
-import io.github.yoshirulz.jtysh.pipeline.PipeArg.Pipeable.RawStringAArg;
-import io.github.yoshirulz.jtysh.pipeline.PipeArg.Pipeable.RawStringArg;
 import io.github.yoshirulz.jtysh.pipeline.PipeCMD.NoArgPipeCMD;
 import io.github.yoshirulz.jtysh.pipeline.PipeCMD.ReqArgPipeCMD;
-import io.github.yoshirulz.jtysh.pipeline.pipecmd.*;
+import io.github.yoshirulz.jtysh.pipeline.pipecmd.AwkFilterCMD;
+import io.github.yoshirulz.jtysh.pipeline.pipecmd.TailFilterCMD;
 import io.github.yoshirulz.jtysh.shell.History;
 
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 
-import static io.github.yoshirulz.jtysh.JTyshInternalError.CannotFinishTempfileRead;
 import static io.github.yoshirulz.jtysh.pipeline.pipecmd.TermEchoCMD.ECHO;
 import static java.text.MessageFormat.format;
 
@@ -44,7 +41,6 @@ public interface Pipeline {
 	default PipeArg<?> t() {
 		return typedOutput();
 	}
-
 
 	default void run() {
 		typedOutput();

@@ -1,7 +1,8 @@
 package io.github.yoshirulz.jtysh.shell;
 
-import io.github.yoshirulz.jtysh.pipeline.*;
+import io.github.yoshirulz.jtysh.pipeline.NoArgPipelineHead;
 import io.github.yoshirulz.jtysh.pipeline.Pipeline.ChainablePipeline;
+import io.github.yoshirulz.jtysh.pipeline.PipelineHead;
 import io.github.yoshirulz.jtysh.shell.pipecmd.JTyshHistoryReadCMD;
 
 import java.util.ArrayList;

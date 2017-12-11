@@ -1,8 +1,6 @@
 package io.github.yoshirulz.jtysh.git;
 
-import io.github.yoshirulz.jtysh.git.pipecmd.GitCloneCMD;
 import io.github.yoshirulz.jtysh.git.pipecmd.GitCloneCMD.CloneOptions;
-import io.github.yoshirulz.jtysh.pipeline.PipeArg;
 import io.github.yoshirulz.jtysh.pipeline.PipeArg.Pipeable;
 import io.github.yoshirulz.jtysh.uris.GitRepoURI;
 
