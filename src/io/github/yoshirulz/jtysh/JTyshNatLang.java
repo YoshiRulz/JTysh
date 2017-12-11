@@ -30,11 +30,12 @@ public enum JTyshNatLang { ;
 		public static ChainablePipeline $(String s) {
 			return new NoArgPipelineHead(new ShellExecMetaWrapperCMD(s));
 		}
-		public static void $$(String s) { $(s).r(); }
+		public static void $$e(String s) { $(s).pipeTo(ECHO).r(); }
+		public static void $$r(String s) { $(s).r(); }
 		public static PipelineVoid echo(Object o) {
 			return Pipeline.from(o.toString()).pipeTo(ECHO);
 		}
-		public static void echo$(Object o) { echo(o).r(); }
+		public static void echo$r(Object o) { echo(o).r(); }
 		public static ChainablePipeline history() {
 			return History.get();
 		}
