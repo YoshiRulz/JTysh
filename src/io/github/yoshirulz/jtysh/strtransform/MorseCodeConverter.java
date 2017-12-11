@@ -6,7 +6,7 @@ import io.github.yoshirulz.jtysh.strtransform.StringTransforms.TransformationTyp
 import java.util.*;
 import java.util.regex.Pattern;
 
-import static io.github.yoshirulz.jtysh.strtransform.StringTransforms.aToZUpper;
+import static io.github.yoshirulz.jtysh.strtransform.StringTransforms.LatinCharset.getUppercase;
 
 /**
  * @author YoshiRulz
@@ -69,7 +69,7 @@ public class MorseCodeConverter implements StringTransform1To1 {
 			dah + dit + dah + dah,
 			dah + dah + dit + dit
 		};
-		sequenceMap = toMorse ? genSequenceMap(aToZUpper, morse) : genSequenceMap(morse, aToZUpper);
+		sequenceMap = toMorse ? genSequenceMap(getUppercase(), morse) : genSequenceMap(morse, getUppercase());
 	}
 	/**
 	 * @param toMorse Pass true for English -> Morse, false for Morse -> English.
