@@ -24,44 +24,38 @@ public enum JTyshNatLang { ;
 	 * @deprecated The `$.*()` shorthand functions should only be used in the shell, and never in code intended to be run more than once.
 	 */
 	@Deprecated
-	@SuppressWarnings({"DollarSignInName", "EnumeratedClassNamingConvention"})
+	@SuppressWarnings({"DollarSignInName", "EnumeratedClassNamingConvention", "StaticMethodNamingConvention"})
 	public enum $ { ;
-		@SuppressWarnings({"MethodNameSameAsClassName", "StaticMethodNamingConvention"})
+		@SuppressWarnings("MethodNameSameAsClassName")
 		public static ChainablePipeline $(String s) {
 			return new NoArgPipelineHead(new ShellExecMetaWrapperCMD(s));
 		}
+		public static void $$(String s) { $(s).r(); }
 		public static PipelineVoid echo(Object o) {
 			return Pipeline.from(o.toString()).pipeTo(ECHO);
 		}
-		@SuppressWarnings("StaticMethodNamingConvention")
 		public static void echo$(Object o) { echo(o).r(); }
 		public static ChainablePipeline history() {
 			return History.get();
 		}
 		public enum git { ;
-			@SuppressWarnings("StaticMethodNamingConvention")
 			public static ChainablePipeline clone_(GitRepoURI uri, CloneOptions options) {
 				return new NoArgPipelineHead(new GitCloneCMD(uri, options));
 			}
-			@SuppressWarnings("StaticMethodNamingConvention")
 			public static ChainablePipeline clone_(GitRepoURI uri) {
 				return clone_(uri, null);
 			}
-			@SuppressWarnings("StaticMethodNamingConvention")
 			public static ChainablePipeline clone_(String uri, CloneOptions options) {
 				return clone_(GitRepoURI.fromURI(new URI(uri)), options);
 			}
-			@SuppressWarnings("StaticMethodNamingConvention")
 			public static ChainablePipeline clone_(String uri) {
 				return clone_(uri, null);
 			}
 		}
 		public enum github { ;
-			@SuppressWarnings("StaticMethodNamingConvention")
 			public static ChainablePipeline clone_(String user, String repo, CloneOptions options) {
 				return git.clone_(new GitHubRepoURI(user, repo), options);
 			}
-			@SuppressWarnings("StaticMethodNamingConvention")
 			public static ChainablePipeline clone_(String user, String repo) {
 				return clone_(user, repo, null);
 			}
