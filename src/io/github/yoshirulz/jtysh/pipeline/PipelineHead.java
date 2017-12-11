@@ -7,6 +7,7 @@ import static java.text.MessageFormat.format;
 
 /**
  * @author YoshiRulz
+ * @see Pipeline
  * @version 2017-12-03/00
  */
 @SuppressWarnings("ClassNamePrefixedWithPackageName")

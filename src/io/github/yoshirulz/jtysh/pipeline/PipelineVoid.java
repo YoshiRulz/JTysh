@@ -8,6 +8,7 @@ import static java.text.MessageFormat.format;
 /**
  * Gives no pipeline output.
  * @author YoshiRulz
+ * @see Pipeline
  * @version 2017-12-05/00
  */
 @SuppressWarnings({"ClassNamePrefixedWithPackageName", "FieldNotUsedInToString"})

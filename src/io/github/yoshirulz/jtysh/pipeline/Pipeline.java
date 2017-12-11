@@ -11,16 +11,16 @@ import static io.github.yoshirulz.jtysh.pipeline.pipecmd.TermEchoCMD.ECHO;
 import static java.text.MessageFormat.format;
 
 /**
- * tl:dr; the rightmost segment of a pipeline, possibly the only segment, possibly allowing additional segments.
- * Represents one of:
- * - the first segment of a pipeline (NoArgPipelineHead);
- * - the rightmost segment, with the rest of the pipeline contained... within? (PipelineHead);
- * - one of these rightmost segments, sealed to prevent more being added to the pipeline (PipelineVoid); or
- * - a single lonely segment that's both the head and final tail of its own pipeline (NoArgPipelineVoid).
+ * Represents one of:<br>
+ * - the first segment of a pipeline (NoArgPipelineHead);<br>
+ * - the rightmost segment, with the rest of the pipeline contained... within? (PipelineHead);<br>
+ * - one of these rightmost segments, sealed to prevent more being added to the pipeline (PipelineVoid); or<br>
+ * - a single lonely segment that's both the head and final tail of its own pipeline (NoArgPipelineVoid).<br>
  * The idea is one can both nest pipelines and construct them iteratively with method chaining, limited only by commands being marked as data sinks. This is to mimic the behaviour of pipelines in the Unix shell.
  * @author YoshiRulz
  * @version 2017-12-03/00
  */
+@SuppressWarnings("ClassNamePrefixedWithPackageName")
 public interface Pipeline {
 	int length();
 

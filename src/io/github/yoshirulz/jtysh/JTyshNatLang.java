@@ -25,7 +25,7 @@ public enum JTyshNatLang { ;
 	 * @deprecated The `$.*()` shorthand functions should only be used in the shell, and never in code intended to be run more than once.
 	 */
 	@Deprecated
-	@SuppressWarnings({"DollarSignInName", "EnumeratedClassNamingConvention", "StaticMethodNamingConvention"})
+	@SuppressWarnings({"DeprecatedIsStillUsed", "DollarSignInName", "EnumeratedClassNamingConvention", "StaticMethodNamingConvention"})
 	public enum $ { ;
 		@SuppressWarnings("MethodNameSameAsClassName")
 		public static ChainablePipeline $(String s) {
@@ -33,6 +33,9 @@ public enum JTyshNatLang { ;
 		}
 		public static void $$e(String s) { $(s).pipeTo(ECHO).r(); }
 		public static void $$r(String s) { $(s).r(); }
+		/**
+		 * You probably want `echo$r()`.
+		 */
 		public static PipelineVoid echo(Object o) {
 			return Pipeline.from(o.toString()).pipeTo(ECHO);
 		}
