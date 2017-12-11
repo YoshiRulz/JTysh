@@ -1,6 +1,5 @@
 package io.github.yoshirulz.jtysh.shell;
 
-import io.github.yoshirulz.jtysh.Main;
 import io.github.yoshirulz.jtysh.shell.WhichWrapper.ProgramNotFoundException;
 
 import java.io.*;
@@ -8,7 +7,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
-import static io.github.yoshirulz.jtysh.JTyshInternalError.CannotFinishTempfileRead;
 import static java.lang.ProcessBuilder.Redirect;
 import static java.lang.ProcessBuilder.Redirect.PIPE;
 
@@ -55,8 +53,8 @@ public class ShellExecWrapper {
 		List<String> temp = new ArrayList<>();
 		try (BufferedReader br = new BufferedReader(r)) {
 			while (br.ready()) temp.add(br.readLine());
-		} catch (IOException ignored) {
-			Main.error(CannotFinishTempfileRead);
+		} catch (IOException e) {
+			throw new CannotFinishTempfileReadException(e);
 		} finally {
 			r.close();
 			output = new String[temp.size()];
@@ -66,5 +64,11 @@ public class ShellExecWrapper {
 
 	public final String[] getOutput() {
 		return output.clone();
+	}
+
+	private static final class CannotFinishTempfileReadException extends RuntimeException {
+		CannotFinishTempfileReadException(Throwable t) {
+			super(t);
+		}
 	}
 }
