@@ -13,7 +13,7 @@ public class GitRepoURI extends URI {
 
 	public GitRepoURI(URIHandler connType, URIDomain domain, String[] location) {
 		super(connType, domain, location);
-		if (!isValidGitProtocol(connType)) throw new GitInvalidProtocolException();
+		if (isInvalidGitProtocol(connType)) throw new GitInvalidProtocolException();
 	}
 	public GitRepoURI(URIDomain domain, String[] location) {
 		this(Git, domain, location);
@@ -22,13 +22,12 @@ public class GitRepoURI extends URI {
 	@SuppressWarnings("MethodWithMoreThanThreeNegations")
 	public static GitRepoURI fromURI(URI uri) {
 		if (!(uri.getHandler() instanceof URIProtocol) ||
-				!isValidGitProtocol(uri.getHandler()) ||
+			isInvalidGitProtocol(uri.getHandler()) ||
 				(uri.getHandler() != Git && !uri.getLocation()[uri.getLocation().length - 1].endsWith(GIT_EXT))) // Using HTTP(S) or SSH and path doesn't match *.git
 			throw new InvalidURICastException(uri, GitRepoURI.class);
 		return new GitRepoURI(uri.getHandler(), uri.getFullDomain(), uri.getLocation());
 	}
 
-	@SuppressWarnings("StaticMethodNamingConvention")
 	public static GitRepoURI parseGitSSHForm(String s) {
 		throw new RuntimeException(""); //TODO make less general
 		//TODO parse
@@ -37,6 +36,7 @@ public class GitRepoURI extends URI {
 	public static class GitHubRepoURI extends GitRepoURI {
 		@SuppressWarnings("HardCodedStringLiteral")
 		private GitHubRepoURI(URIHandler connType, String user, String repo) {
+			//noinspection StringConcatenationMissingWhitespace
 			super(connType,
 					new URIDomain(connType == SSH ? "git" : null, null, "github.com", connType.getDefaultPort()),
 					new String[]{user, repo + GIT_EXT}
@@ -57,7 +57,7 @@ public class GitRepoURI extends URI {
 		}
 	}
 
-	private static boolean isValidGitProtocol(URIHandler handler) {
-		return handler == Git || handler == HTTP || handler == HTTPS || handler == SSH;
+	private static boolean isInvalidGitProtocol(URIHandler handler) {
+		return handler != Git && handler != HTTP && handler != HTTPS && handler != SSH;
 	}
 }

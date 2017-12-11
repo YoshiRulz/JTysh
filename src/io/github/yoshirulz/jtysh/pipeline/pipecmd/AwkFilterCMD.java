@@ -35,6 +35,7 @@ public final class AwkFilterCMD implements ReqArgPipeCMD {
 	public String toString() {
 		StringJoiner sj = new StringJoiner(" ")
 			.add(CMD_STRING[0]);
+		//noinspection StringConcatenationMissingWhitespace
 		if (!separator.equals(DEFAULT_SEPARATOR)) sj.add("-F" + separator);
 		sj.add(CMD_STRING[1]);
 		return format(sj.toString(), field);

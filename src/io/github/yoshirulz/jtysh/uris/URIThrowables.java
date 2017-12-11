@@ -8,31 +8,31 @@ import java.text.MessageFormat;
  */
 public enum URIThrowables { ;
 	private static class URIException extends RuntimeException {
-		public URIException(String s) {
+		URIException(String s) {
 			super(s);
 		}
 	}
 
 	public static final class GitHubDeprecatedProtocolException extends URIException {
-		public GitHubDeprecatedProtocolException() {
+		GitHubDeprecatedProtocolException() {
 			super("GitHub no longer allows HTTP connections.");
 		}
 	}
 
 	public static final class GitInvalidProtocolException extends URIException {
-		public GitInvalidProtocolException() {
+		GitInvalidProtocolException() {
 			super("Git can only use the Git, HTTP(S) and SSH protocols.");
 		}
 	}
 
 	public static final class InvalidURICastException extends URIException {
-		public InvalidURICastException(URI uri, Class<? extends URI> uriClass) {
+		InvalidURICastException(URI uri, Class<? extends URI> uriClass) {
 			super(MessageFormat.format("Could not cast {0} to {1}.", uri, uriClass));
 		}
 	}
 
 	public static final class WebInvalidProtocolException extends URIException {
-		public WebInvalidProtocolException() {
+		WebInvalidProtocolException() {
 			super("WebURIs can only use HTTP(S).");
 		}
 	}

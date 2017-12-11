@@ -22,7 +22,6 @@ public final class ShellExecMetaWrapperCMD implements NoArgPipeCMD {
 	private static final int SB_CAP = 128;
 
 	private final String cmd;
-	@SuppressWarnings("InstanceVariableMayNotBeInitialized")
 	private String[] args;
 	@SuppressWarnings({"FieldNotUsedInToString", "InstanceVariableMayNotBeInitialized"})
 	private PipeArg<?> pipeOut;

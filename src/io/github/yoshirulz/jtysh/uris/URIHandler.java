@@ -32,6 +32,7 @@ public interface URIHandler {
 			return name().toLowerCase();
 		}
 
+		@SuppressWarnings("TypeMayBeWeakened")
 		public static URIProtocol parseString(String s) {
 			switch (s) {
 				case "ftp": return FTP;

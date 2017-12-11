@@ -36,6 +36,7 @@ public enum JTyshNatLang { ;
 		/**
 		 * You probably want `echo$r()`.
 		 */
+		@SuppressWarnings("TypeMayBeWeakened")
 		public static PipelineVoid echo(Object o) {
 			return Pipeline.from(o.toString()).pipeTo(ECHO);
 		}

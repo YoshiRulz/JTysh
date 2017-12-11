@@ -21,16 +21,10 @@ public class SimpleCiphers {
 
 		public String performOn(String s) {
 			StringBuilder toReturn = new StringBuilder();
-			int temp;
 			for (char c : s.toCharArray()) {
-				temp = c;
-				if (64 < temp && temp < 91) {
-					toReturn.append((char) (65 + (temp - 65 + shift) % 26));
-				} else if (96 < temp && temp < 123) {
-					toReturn.append((char) (97 + (temp - 97 + shift) % 26));
-				} else {
-					toReturn.append(c);
-				}
+				if (64 < (int) c && (int) c < 91) toReturn.append((char) (65 + ((int) c - 65 + shift) % 26));
+				else if (96 < (int) c && (int) c < 123) toReturn.append((char) (97 + ((int) c - 97 + shift) % 26));
+				else toReturn.append(c);
 			}
 			return toReturn.toString();
 		}
