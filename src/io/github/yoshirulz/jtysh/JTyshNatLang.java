@@ -6,6 +6,7 @@ import io.github.yoshirulz.jtysh.pipeline.*;
 import io.github.yoshirulz.jtysh.pipeline.Pipeline.ChainablePipeline;
 import io.github.yoshirulz.jtysh.shell.History;
 import io.github.yoshirulz.jtysh.shell.pipecmd.ShellExecMetaWrapperCMD;
+import io.github.yoshirulz.jtysh.strtransform.StringSplit;
 import io.github.yoshirulz.jtysh.uris.GitRepoURI;
 import io.github.yoshirulz.jtysh.uris.GitRepoURI.GitHubRepoURI;
 import io.github.yoshirulz.jtysh.uris.URI;
@@ -28,7 +29,7 @@ public enum JTyshNatLang { ;
 	public enum $ { ;
 		@SuppressWarnings("MethodNameSameAsClassName")
 		public static ChainablePipeline $(String s) {
-			return new NoArgPipelineHead(new ShellExecMetaWrapperCMD(s));
+			return new NoArgPipelineHead(new ShellExecMetaWrapperCMD(StringSplit.onSpaces(s)));
 		}
 		public static void $$e(String s) { $(s).pipeTo(ECHO).r(); }
 		public static void $$r(String s) { $(s).r(); }
