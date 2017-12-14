@@ -1,4 +1,5 @@
 # JTysh
+[![BCH compliance](https://bettercodehub.com/edge/badge/YoshiRulz/JTysh?branch=master)](https://bettercodehub.com/)
 
 ## Quick start
 ```
