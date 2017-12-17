@@ -8,7 +8,7 @@ import static io.github.yoshirulz.jtysh.uris.URIHandler.URIProtocol.parseString;
 
 /**
  * @author YoshiRulz
- * @version 2017-12-11/00
+ * @version 2017-12-17/00
  */
 @SuppressWarnings({"ClassNamingConvention", "HardCodedStringLiteral", "WeakerAccess", "unused"})
 public class URI {
@@ -29,18 +29,24 @@ public class URI {
 
 	public URI(String uri) {
 		String[] splitURI = uri.split(LOC_SEP);
-		if (splitURI[1].isEmpty() && splitURI[0].endsWith(":")) {
-			String temp = splitURI[0].substring(0, splitURI[0].length() - 1);
-			URIHandler temp1 = parseString(temp);
-			fullDomain = URIDomain.parseString(splitURI[2]);
-			handler = temp1 == UNKNOWN ? new URICustomHandler(temp, fullDomain.port, true) : temp1;
-			location = new String[splitURI.length - 3];
-			System.arraycopy(splitURI, 3, location, 0, location.length);
-		} else if (splitURI[0].contains(":")) {
-			String[] temp = splitURI[0].split(":");
-			fullDomain = new URIDomain("oops"); //TODO
-			handler = new URICustomHandler(temp[0], fullDomain.port, false);
-			location = new String[]{"oops"}; //TODO
+		if (uri.contains(HANDLE_SEP)) {
+			if (splitURI[1].isEmpty() && splitURI[0].endsWith(":")) {
+				String temp = splitURI[0].substring(0, splitURI[0].length() - 1);
+				URIHandler temp1 = parseString(temp);
+				fullDomain = URIDomain.parseString(splitURI[2]);
+				handler = temp1 == UNKNOWN ? new URICustomHandler(temp, fullDomain.port, true) : temp1;
+				location = new String[splitURI.length - 3];
+				System.arraycopy(splitURI, 3, location, 0, location.length);
+			} else if (splitURI[0].contains(":")) {
+				String[] temp = splitURI[0].split(":");
+				fullDomain = new URIDomain("oops");
+				handler = new URICustomHandler(temp[0], fullDomain.port, false);
+				location = new String[]{"oops"};
+			} else {
+				fullDomain = null;
+				handler = null;
+				location = null;
+			}
 		} else {
 			fullDomain = URIDomain.parseString(splitURI[0]);
 			handler = UNKNOWN;
@@ -51,10 +57,12 @@ public class URI {
 
 	public String toString() {
 		StringBuilder sb = new StringBuilder(SB_CAP);
-		if (handler != null) sb.append(handler.getHandle()).append(HANDLE_SEP);
-		if (fullDomain.port != handler.getDefaultPort()) sb.append(fullDomain);
-		else sb.append(fullDomain.toString().split(":")[0]); //TODO simplify?
-		sb.append(LOC_SEP).append(StringAConcat.with(LOC_SEP, location));
+		if (handler != null) {
+			sb.append(handler.getHandle()).append(HANDLE_SEP);
+			if (fullDomain.port != handler.getDefaultPort()) sb.append(fullDomain);
+			else sb.append(fullDomain.toString().split(":")[0]);
+		}
+		if (location.length > 0) sb.append(LOC_SEP).append(StringAConcat.with(LOC_SEP, location));
 		return sb.toString();
 	}
 
