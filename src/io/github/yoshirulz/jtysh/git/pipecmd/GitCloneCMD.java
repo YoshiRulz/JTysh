@@ -9,14 +9,13 @@ import io.github.yoshirulz.jtysh.uris.GitRepoURI;
 import java.text.MessageFormat;
 import java.util.StringJoiner;
 
-import static io.github.yoshirulz.jtysh.git.pipecmd.GitCloneCMD.CloneOptions.DEFAULT_CLONE_OPTS;
-
 /**
  * @author YoshiRulz
- * @version 2017-12-11/00
+ * @version 2017-12-21/00
  */
 public class GitCloneCMD implements NoArgPipeCMD {
 	private static final String CMD_STRING = "git clone{1} {0}";
+	private static final CloneOptions DEFAULT_CLONE_OPTS = new CloneOptions();
 
 	private final GitRepoURI uri;
 	private final CloneOptions options;
@@ -39,8 +38,6 @@ public class GitCloneCMD implements NoArgPipeCMD {
 
 	@SuppressWarnings({"InstanceVariableMayNotBeInitialized", "WeakerAccess"})
 	public static class CloneOptions implements Pipeable {
-		static final CloneOptions DEFAULT_CLONE_OPTS = new CloneOptions();
-
 		private String branch;
 		private boolean isSingleBranch;
 
