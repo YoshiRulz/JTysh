@@ -20,18 +20,6 @@ public class History {
 
 	private static UnixShell shell = JTysh;
 
-//	@SuppressWarnings({"CollectionWithoutInitialCapacity", "MethodCallInLoopCondition"})
-//	public static String[] getRawHistory(CommonShells sh) {
-//		try (BufferedReader br = new BufferedReader(new FileReader(sh.getHistoryFile()))) {
-//			List<String> temp = new ArrayList<>();
-//			while (br.ready()) temp.add(br.readLine());
-//			return temp.toArray(new String[temp.size()]);
-//		} catch (IOException e) {
-//			e.printStackTrace();
-//		}
-//		return NO_OUTPUT;
-//	}
-
 	public static ChainablePipeline get() {
 		return shell == JTysh ? new NoArgPipelineHead(new JTyshHistoryReadCMD()) : new NoArgPipelineHead(null); //TODO
 	}

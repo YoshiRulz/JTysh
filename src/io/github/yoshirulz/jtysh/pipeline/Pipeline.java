@@ -5,6 +5,7 @@ import io.github.yoshirulz.jtysh.pipeline.PipeCMD.ReqArgPipeCMD;
 import io.github.yoshirulz.jtysh.pipeline.pipecmd.AwkFilterCMD;
 import io.github.yoshirulz.jtysh.pipeline.pipecmd.TailFilterCMD;
 import io.github.yoshirulz.jtysh.shell.History;
+import io.github.yoshirulz.jtysh.shell.pipecmd.FileReadCMD;
 
 import java.io.*;
 import java.util.ArrayList;
@@ -76,22 +77,14 @@ public interface Pipeline {
 		return asPipeArg();
 	}
 
+	static ChainablePipeline from(File f) {
+		return new NoArgPipelineHead(new FileReadCMD(f));
+	}
 	static ChainablePipeline from(PipeArg<?> p) {
 		return new NoArgPipelineHead(new DumpArgCMD(p));
 	}
 	static ChainablePipeline from(String[] a) {
 		return from(PipeArg.rawString(a));
-	}
-	static ChainablePipeline from(File f) {
-		List<String> temp = new ArrayList<>(16);
-		//noinspection ImplicitDefaultCharsetUsage
-		try (BufferedReader br = new BufferedReader(new FileReader(f))) {
-			//noinspection MethodCallInLoopCondition
-			while (br.ready()) temp.add(br.readLine());
-		} catch (IOException e) {
-			throw new RuntimeException(e); //TODO
-		}
-		return from(temp.toArray(new String[temp.size()]));
 	}
 	static ChainablePipeline from(String s) {
 		return from(PipeArg.rawString(s));
