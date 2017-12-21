@@ -10,94 +10,51 @@ import static io.github.yoshirulz.jtysh.strtransform.StringTransforms.LatinChars
 
 /**
  * @author YoshiRulz
- * @version 2017-12-11/00
+ * @version 2017-12-21/00
  */
 @SuppressWarnings("WeakerAccess")
 public class MorseCodeConverter implements StringTransform1To1 {
-	private static final String DEFAULT_DIT = ".";
-	private static final String DEFAULT_DAH = "-";
-	private static final String DEFAULT_WORD_BREAK = " / ";
-	private static final String DEFAULT_CHAR_BREAK = " ";
-	private static final String DEFAULT_UNKNOWN = "?";
+	public static final MorseCodeOptions DEFAULT_OPTIONS = new MorseCodeOptions();
 
+	private static final int HM_SIZE = 35;
 	private static final Pattern PLAINTEXT_WORD_BREAK = Pattern.compile(" ");
 
-	public static final MorseCodeConverter DEFAULT_FROM_MORSE = new MorseCodeConverter(false, DEFAULT_DIT, DEFAULT_DAH, DEFAULT_WORD_BREAK, DEFAULT_CHAR_BREAK);
-	public static final MorseCodeConverter DEFAULT_TO_MORSE = new MorseCodeConverter(true, DEFAULT_DIT, DEFAULT_DAH, DEFAULT_WORD_BREAK, DEFAULT_CHAR_BREAK);
-
 	private final boolean toMorse;
-	private final Pattern wordBreak;
 	private final Pattern charBreak;
+	private final Pattern wordBreak;
 	private final String unknownSequence;
 	private final Map<String, String> sequenceMap;
 
-	/**
-	 * @param toMorse Pass true for plaintext -> Morse, false for Morse -> plaintext.
-	 * @param unknownSequence To be inserted into the output when a morse sequence is unrecognized.
-	 */
+	/** @param toMorse Pass true for plaintext -> Morse, false for Morse -> plaintext. */
 	@SuppressWarnings({"StringConcatenation", "StringConcatenationMissingWhitespace"})
-	public MorseCodeConverter(boolean toMorse, String dit, String dah, Pattern wordBreak, Pattern charBreak, String unknownSequence) {
+	public MorseCodeConverter(boolean toMorse, MorseCodeOptions options) {
 		this.toMorse = toMorse;
-		this.wordBreak = wordBreak;
-		this.charBreak = charBreak;
-		this.unknownSequence = unknownSequence;
+		wordBreak = options.wordBreak;
+		charBreak = options.charBreak;
+		unknownSequence = options.unknownSequence;
+		String i = options.dit;
+		String a = options.dah;
 		String[] morse = new String[]{
-			dit + dah,
-			dah + dit + dit + dit,
-			dah + dit + dah + dit,
-			dah + dit + dit,
-			dit,
-			dit + dit + dah + dit,
-			dah + dah + dit,
-			dit + dit + dit + dit,
-			dit + dit,
-			dit + dah + dah + dah,
-			dah + dit + dah,
-			dit + dah + dit + dit,
-			dah + dah,
-			dah + dit,
-			dah + dah + dah,
-			dit + dah + dah + dit,
-			dah + dah + dit + dah,
-			dit + dah + dit,
-			dit + dit + dit,
-			dah,
-			dit + dit + dah,
-			dit + dit + dit + dah,
-			dit + dah + dah,
-			dah + dit + dit + dah,
-			dah + dit + dah + dah,
-			dah + dah + dit + dit
+			i + a,          a + i + i + i,
+			a + i + a + i,  a + i + i,
+			i,              i + i + a + i,
+			a + a + i,      i + i + i + i,
+			i + i,          i + a + a + a,
+			a + i + a,      i + a + i + i,
+			a + a,          a + i,
+			a + a + a,      i + a + a + i,
+			a + a + i + a,  i + a + i,
+			i + i + i,      a,
+			i + i + a,      i + i + i + a,
+			i + a + a,      a + i + i + a,
+			a + i + a + a,  a + a + i + i
 		};
 		sequenceMap = toMorse ? genSequenceMap(getUppercase(), morse) : genSequenceMap(morse, getUppercase());
 	}
-	/**
-	 * @param toMorse Pass true for English -> Morse, false for Morse -> English.
-	 */
-	public MorseCodeConverter(boolean toMorse, String dit, String dah, Pattern wordBreak, Pattern charBreak) {
-		this(toMorse, dit, dah, wordBreak, charBreak, toMorse ? null : DEFAULT_UNKNOWN);
-	}
-	/**
-	 * @param toMorse Pass true for English -> Morse, false for Morse -> English.
-	 * @param wordBreak RegEx, using anything but literal characters may impact performance.
-	 * @param charBreak RegEx, using anything but literal characters may impact performance.
-	 * @param unknownSequence To be inserted into the output when a morse sequence is unrecognized.
-	 */
-	public MorseCodeConverter(boolean toMorse, String dit, String dah, String wordBreak, String charBreak, String unknownSequence) {
-		this(toMorse, dit, dah, Pattern.compile(wordBreak), Pattern.compile(charBreak), unknownSequence);
-	}
-	/**
-	 * @param toMorse Pass true for English -> Morse, false for Morse -> English.
-	 * @param wordBreak RegEx, using anything but literal characters may impact performance.
-	 * @param charBreak RegEx, using anything but literal characters may impact performance.
-	 */
-	public MorseCodeConverter(boolean toMorse, String dit, String dah, String wordBreak, String charBreak) {
-		this(toMorse, dit, dah, Pattern.compile(wordBreak), Pattern.compile(charBreak));
-	}
 
-	@SuppressWarnings({"ArrayLengthInLoopCondition", "MagicNumber"})
+	@SuppressWarnings("ArrayLengthInLoopCondition")
 	private static Map<String, String> genSequenceMap(String[] keys, String[] values) {
-		Map<String, String> toReturn = new HashMap<>(35);
+		Map<String, String> toReturn = new HashMap<>(HM_SIZE);
 		for (int i = 0; i < keys.length; i++) toReturn.put(keys[i], values[i]);
 		return toReturn;
 	}
@@ -115,5 +72,30 @@ public class MorseCodeConverter implements StringTransform1To1 {
 			sj.add(sj1.toString());
 		});
 		return sj.toString();
+	}
+
+	@SuppressWarnings({"FieldHasSetterButNoGetter", "PackageVisibleField"})
+	public static class MorseCodeOptions {
+		String dit = ".";
+		String dah = "-";
+		Pattern charBreak = Pattern.compile(" ");
+		Pattern wordBreak = Pattern.compile(" / ");
+		String unknownSequence = "?";
+
+		public MorseCodeOptions setDit(String s) {
+			dit = s; return this; }
+		public MorseCodeOptions setDah(String s) {
+			dah = s; return this; }
+		public MorseCodeOptions setCharBreak(Pattern p) {
+			charBreak = p; return this; }
+		/** @param s RegEx, using anything but literal characters may impact performance. */
+		public MorseCodeOptions setCharBreak(String s) { return setCharBreak(Pattern.compile(s)); }
+		public MorseCodeOptions setWordBreak(Pattern p) {
+			wordBreak = p; return this; }
+		/** @param s RegEx, using anything but literal characters may impact performance. */
+		public MorseCodeOptions setWordBreak(String s) { return setWordBreak(Pattern.compile(s)); }
+		/** @param s To be inserted into the output when a morse sequence is unrecognized. */
+		public MorseCodeOptions setUnknownSequence(String s) {
+			unknownSequence = s; return this; }
 	}
 }
